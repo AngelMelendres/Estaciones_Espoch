@@ -1,6 +1,8 @@
 import React from "react";
 import ItemEstacion from "./ItemEstacion";
+import useEstaciones from "../../hooks/useEstaciones";
 const Estaciones = () => {
+  const {estaciones} = useEstaciones();
   return (
     <>
       <div>
@@ -26,7 +28,8 @@ const Estaciones = () => {
                       className="h6 text-decoration-none text-info"
                       href="/estaciones/add"
                     >
-                      <i className="fa fa-plus text-info mr-2"></i>Añadir estación
+                      <i className="fa fa-plus text-info mr-2"></i>Añadir
+                      estación
                     </a>
                   </div>
                 </div>

@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import conectarDB from "./config/db.js";
 import estacionesRoutes from "./routes/estacionesRoutes.js"; // Reemplaza con el nombre correcto de tus rutas
+import usuarioRoutes from "./routes/usuarioRoutes.js"; // Reemplaza con el nombre correcto de tus rutas de usuario
 
 const app = express();
 app.use(express.json());
@@ -29,7 +30,9 @@ const corsOptions = {
 app.use(cors(corsOptions)); */
 
 // Routing
-app.use("/api/estaciones", estacionesRoutes); // Reemplaza con la ruta correcta
+app.use("/api/estaciones", estacionesRoutes); // 
+app.use("/api/usuarios", usuarioRoutes); // Rutas para el usuario
+
 
 const PORT = process.env.PORT || 4000;
 const servidor = app.listen(PORT, () => {

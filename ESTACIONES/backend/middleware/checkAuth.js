@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import Usuario from "../models/Usuario.js";
+import { pool } from "../config/db.js";
 
 const checkAuth = async (req, res, next) => {
   let token;
@@ -12,9 +13,11 @@ const checkAuth = async (req, res, next) => {
 
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-      req.usuario = await Usuario.findById(decoded.id).select(
-        "-password -confirmado -token -createdAt -updatedAt -__v"
-      );
+      const query = "SELECT * FROM usuarios WHERE id = $1";
+      const values = [decoded.id];
+      const { rows } = await pool.query(query, values);
+
+      req.usuario = rows[0];
 
       return next();
     } catch (error) {
