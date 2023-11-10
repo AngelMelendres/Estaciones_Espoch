@@ -12,10 +12,10 @@ dotenv.config();
 
 conectarDB();
 
-/* // Configurar CORS
+// Configurar CORS
 const whitelist = [process.env.FRONTEND_URL];
 
-const corsOptions = {
+/* const corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.includes(origin)) {
       // Puede consultar la API
@@ -25,9 +25,9 @@ const corsOptions = {
       callback(new Error("Error de Cors"));
     }
   },
-};
+}; */
+app.use(cors());
 
-app.use(cors(corsOptions)); */
 
 // Routing
 app.use("/api/estaciones", estacionesRoutes); // 

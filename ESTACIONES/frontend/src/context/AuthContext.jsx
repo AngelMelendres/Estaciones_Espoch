@@ -1,18 +1,18 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import UsuarioAxios from "../config/usuarioAxios";
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState({
-    usuario: "123",
-    contrasena: "123",
-  });
+  const [auth, setAuth] = useState({});
+  const [cargando, setCargando] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
-  /* useEffect(() => {
+  useEffect(() => {
     const authUser = async () => {
       const token = localStorage.getItem("token");
       if (!token) {
+        setCargando(false);
         return;
       }
 
@@ -24,14 +24,22 @@ const AuthProvider = ({ children }) => {
       };
       try {
         const data = await UsuarioAxios("/usuarios/perfil", config);
-        console.log("token ok");
+        setAuth(data);
       } catch (error) {}
     };
 
     authUser();
-  }, []); */
+  }, []);
 
-  return <AuthContext.Provider value={{}}>{children}</AuthContext.Provider>;
+  const cerrarSesionAuth = () => {
+    setAuth({});
+  };
+
+  return (
+    <AuthContext.Provider value={{ setAuth, auth, isAuthenticated }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export { AuthProvider };

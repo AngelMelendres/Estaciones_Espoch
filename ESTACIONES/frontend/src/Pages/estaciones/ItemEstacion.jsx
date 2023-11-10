@@ -1,5 +1,5 @@
 import React from "react";
-const ItemEstacion = () => {
+const ItemEstacion = ({ estacion }) => {
   return (
     <>
       <div className="col-lg-4 col-md-6 mb-4">
@@ -12,23 +12,23 @@ const ItemEstacion = () => {
             <div className="d-flex justify-content-between mb-3">
               <small className="m-0" title="Ubicación">
                 <i className="fa fa-map-marker-alt text-info mr-2"></i>
-                Porroqui, Canton
+                {estacion.provincia} | {estacion.canton}
               </small>
               <small className="m-0" title="Altura">
-                <i className="fa fa-mountain text-info mr-2"></i>324234 m
+                <i className="fa fa-mountain text-info mr-2"></i>{estacion.altura} m
               </small>
             </div>
             <a className="h5 text-decoration-none" target="_blank">
-              Nombre estacion
+            {estacion.nombre}
             </a>
             <div className="border-top mt-4 pt-4">
               <div className="d-flex justify-content-between">
                 <h6 className="m-0">
                   <i className="fa fa-globe text-info mr-2"></i>Latitud:{" "}
-                  <small>123123</small>
+                  <small>{estacion.latitud}</small>
                 </h6>
                 <h6 className="m-0">
-                  Longitud: <small>123324</small>
+                  Longitud: <small>{estacion.longitud}</small>
                 </h6>
               </div>
             </div>

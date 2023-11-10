@@ -1,8 +1,9 @@
 import React from "react";
 import ItemEstacion from "./ItemEstacion";
 import useEstaciones from "../../hooks/useEstaciones";
+import { Link } from "react-router-dom";
 const Estaciones = () => {
-  const {estaciones} = useEstaciones();
+  const { estaciones } = useEstaciones();
   return (
     <>
       <div>
@@ -19,18 +20,20 @@ const Estaciones = () => {
               <h2>Información de las Estaciones</h2>
             </div>
             <div className="row">
-              <ItemEstacion />
+              {estaciones.map((estaciones, i) => (
+                <ItemEstacion key={i} estacion={estaciones} />
+              ))}
 
               <div className="col-lg-4 col-md-6 mb-4">
                 <div className="package-item bg-white mb-2">
                   <div className="p-3">
-                    <a
+                    <Link
                       className="h6 text-decoration-none text-info"
-                      href="/estaciones/add"
+                      to={"/estaciones/add"}
                     >
                       <i className="fa fa-plus text-info mr-2"></i>Añadir
                       estación
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

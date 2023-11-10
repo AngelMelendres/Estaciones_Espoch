@@ -2,26 +2,26 @@ import { pool } from "../config/db.js";
 import bcrypt from "bcrypt";
 
 class Usuario {
-  static async obtenerUsuarioPorEmail(correo) {
-    const query = "SELECT * FROM usuarios WHERE correo = $1";
-    const values = [correo];
+  static async obtenerUsuarioPorEmail(email) {
+    const query = "SELECT * FROM usuarios WHERE email = $1";
+    const values = [email];
     const { rows } = await pool.query(query, values);
     return rows[0];
   }
 
   static async crearUsuario(usuarioData) {
-    const { nombre, correo, contraseña } = usuarioData;
-    const hashedPassword = await bcrypt.hash(contraseña, 10);
+    const { nombre, email, password } = usuarioData;
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const query =
-      "INSERT INTO usuarios (nombre, correo, contraseña) VALUES ($1, $2, $3) RETURNING *";
-    const values = [nombre, correo, hashedPassword];
+      "INSERT INTO usuarios (nombre, email, password, token) VALUES ($1, $2, $3, $4) RETURNING *";
+    const values = [nombre, email, hashedPassword, hashedPassword];
     const { rows } = await pool.query(query, values);
     return rows[0];
   }
 
   static async comprobarPassword(usuario, passwordFormulario) {
-    return await bcrypt.compare(passwordFormulario, usuario.contraseña);
+    return await bcrypt.compare(passwordFormulario, usuario.password);
   }
 
   static async actualizarUsuarioConfirmado(id, token) {

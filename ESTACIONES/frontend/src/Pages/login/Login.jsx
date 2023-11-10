@@ -1,10 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import UsuarioAxios from "../../config/usuarioAxios";
+import Alerta from "../components/Alerta";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [alerta, setAlerta] = useState({});
 
-  const { login } = useAuth();
+  const { setAuth } = useAuth();
 
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if ([email, password].includes("")) {
+      setAlerta({
+        msg: "Todos los campos son obligatorios",
+        error: true,
+      });
+      return;
+    }
+
+    try {
+      const { data } = await UsuarioAxios.post("/usuarios/login", {
+        email,
+        password,
+      });
+      setAlerta({});
+      localStorage.setItem("token", data.token);
+      setAuth(data);
+      navigate("/estaciones");
+    } catch (error) {
+      setAlerta({
+        msg: error.response.data.msg,
+        error: true,
+      });
+    }
+  };
+
+  const { msg } = alerta;
 
   return (
     <>
@@ -28,31 +65,34 @@ const Login = () => {
                 <p className="mb-4">
                   Por favor, ingrese sus datos para iniciar sesión
                 </p>
-
+                {msg && <Alerta alerta={alerta} />}
                 <form
                   id="formAuthentication"
                   className="mb-3"
-                  action="/login"
-                  method="POST"
+                  onSubmit={handleSubmit}
                 >
                   <div className="mb-3">
                     <label className="form-label text-dark">
-                      <i className="fa fa-user text-info mr-2"></i>Usuario
+                      <i className="fa fa-user text-info mr-2"></i>Correo
                     </label>
                     <input
-                      type="text"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      type="email"
                       className="form-control"
-                      id="usuario"
-                      name="nombre"
-                      placeholder="Ingrese su nombre de usuario"
-                      autofocus
+                      name="email"
+                      placeholder="Ingrese su correo"
                       required
                     />
                   </div>
                   <div className="mb-3 form-password-toggle">
                     <div className="d-flex justify-content-between">
-                      <label className="form-label text-dark" for="password">
-                        <i className="fa fa-unlock text-info mr-2"></i>Contraseña
+                      <label
+                        className="form-label text-dark"
+                        htmlFor="password"
+                      >
+                        <i className="fa fa-unlock text-info mr-2"></i>
+                        Contraseña
                       </label>
                       <a href="">
                         <small>¿Olvidaste tu contraseña?</small>
@@ -60,10 +100,11 @@ const Login = () => {
                     </div>
                     <div className="input-group input-group-merge">
                       <input
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         type="password"
-                        id="password"
                         className="form-control"
-                        name="contrasena"
+                        name="password"
                         placeholder="Ingrese su contraseña"
                         aria-describedby="password"
                         required
@@ -71,7 +112,7 @@ const Login = () => {
                     </div>
                   </div>
                   <div className="mb-3">
-                    <button className="btn btn-info d-grid w-100" type="submit">
+                    <button className="btn btn-info d-grid w-100">
                       Iniciar sesión
                     </button>
                   </div>
