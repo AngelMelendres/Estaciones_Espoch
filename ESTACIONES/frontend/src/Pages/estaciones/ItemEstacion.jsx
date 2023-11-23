@@ -1,5 +1,12 @@
 import React from "react";
+import useEstaciones from "../../hooks/useEstaciones";
 const ItemEstacion = ({ estacion }) => {
+  const { eliminarEstacion, actualizarEstacion } = useEstaciones();
+
+  const handleclickDelete = () => {
+    eliminarEstacion(estacion.id);
+  };
+
   return (
     <>
       <div className="col-lg-4 col-md-6 mb-4">
@@ -15,11 +22,12 @@ const ItemEstacion = ({ estacion }) => {
                 {estacion.provincia} | {estacion.canton}
               </small>
               <small className="m-0" title="Altura">
-                <i className="fa fa-mountain text-info mr-2"></i>{estacion.altura} m
+                <i className="fa fa-mountain text-info mr-2"></i>
+                {estacion.altura} m
               </small>
             </div>
             <a className="h5 text-decoration-none" target="_blank">
-            {estacion.nombre}
+              {estacion.nombre}
             </a>
             <div className="border-top mt-4 pt-4">
               <div className="d-flex justify-content-between">
@@ -36,7 +44,10 @@ const ItemEstacion = ({ estacion }) => {
               <a className="btn btn-info d-grid w-auto mx-2" href="">
                 <i className="fa fa-pen mr-2"></i>Editar
               </a>
-              <a className="btn btn-danger d-grid w-auto mx-2">
+              <a
+                className="btn btn-danger d-grid w-auto mx-2"
+                onClick={handleclickDelete}
+              >
                 <i className="fa fa-trash mr-2"></i>Eliminar
               </a>
             </div>

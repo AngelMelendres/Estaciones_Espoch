@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { EstacionesProvider } from "./context/EstacionesContext";
 import { AuthProvider } from "./context/AuthContext";
 import Estaciones from "./Pages/estaciones/Estaciones";
@@ -10,10 +10,13 @@ import NotFound from "./Pages/NotFound";
 import EditarEstacion from "./Pages/estaciones/EditarEstacion";
 import AgregarEstacion from "./Pages/estaciones/AgregarEstacion";
 import PrivateRoute from "./Pages/layouts/PrivateRoute";
+import Charts from "./Pages/components/Charts";
+import Map from "./Pages/components/Map";
+import DatosInstantaneos from "./Pages/estaciones/DatosInstantaneos";
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <AuthProvider>
         <EstacionesProvider>
           <RootLayout>
@@ -23,20 +26,25 @@ function App() {
               <Route path="/sensores" exact element={<Sensores />} />
               <Route path="/login" exact element={<Login />} />
 
-              <Route exact path="/estaciones/crear" element={<PrivateRoute />}>
+              <Route element={<PrivateRoute />}>
                 <Route
-                  exact
                   path="/estaciones/crear"
                   element={<AgregarEstacion />}
-                />
+                ></Route>
+                <Route path="/editar" element={<EditarEstacion />}></Route>
               </Route>
 
+              <Route path="/chart" element={<Charts />}></Route>
+              <Route
+                path="/instantaneos"
+                element={<DatosInstantaneos />}
+              ></Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
           </RootLayout>
         </EstacionesProvider>
       </AuthProvider>
-    </Router>
+    </BrowserRouter>
   );
 }
 

@@ -29,6 +29,7 @@ const whitelist = [process.env.FRONTEND_URL];
 app.use(cors());
 
 
+
 // Routing
 app.use("/api/estaciones", estacionesRoutes); // 
 app.use("/api/usuarios", usuarioRoutes); // Rutas para el usuario

@@ -1,5 +1,6 @@
 import React from "react";
-import image1 from "../../../public/img/matus_n.jpeg";
+import imageLogo from "/img/logo-espoch.png";
+import imageAvatar from "/img/avatar.png";
 import { Link } from "react-router-dom";
 
 const Header = () => {
@@ -48,7 +49,7 @@ const Header = () => {
             style={{ zIndex: 9 }}
           >
             <nav className="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-3 py-lg-0 pl-3 pl-lg-4">
-              <img src="public/img/logo-espoch.png"></img>
+              <img src={imageLogo}></img>
               <Link to={"/"} className="navbar-brand">
                 <h2 className="m-0 text-info">
                   <span className="text-dark">Estaciones</span>
@@ -56,14 +57,17 @@ const Header = () => {
                 <h2 className="m-0 text-info">Meteorológicas</h2>
               </Link>
               <button
+                class="navbar-toggler"
                 type="button"
-                className="navbar-toggler"
                 data-toggle="collapse"
-                data-target="#navbarCollapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
               >
-                <span className="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
               </button>
-              <div id="navbarCollapse">
+              <div class="collapse navbar-collapse" id="navbarSupportedContent" style={{visibility: 'visible'}}>
                 <div className="navbar-nav ml-auto py-0">
                   <Link to={"/"} className="nav-item nav-link active">
                     Inicio
@@ -80,13 +84,16 @@ const Header = () => {
                       <Link to={"/estaciones"} className="dropdown-item">
                         Estaciones
                       </Link>
+                      <Link to={"/instantaneos"} className="dropdown-item">
+                        Datos Instantaneos
+                      </Link>
                       <Link to={"/sensores"} className="dropdown-item">
                         Sensores
                       </Link>
                       <Link to="" className="dropdown-item">
                         Fichas técnicas
                       </Link>
-                      <Link to="/equipo" className="dropdown-item">
+                      <Link to="/estaciones/crear" className="dropdown-item">
                         Equipo de trabajo
                       </Link>
                       <Link to="/mantenimiento" className="dropdown-item">
@@ -120,7 +127,7 @@ const Header = () => {
                         <div className="flex-shrink-0 me-3">
                           <div className="px-1">
                             <img
-                              src="/img/avatar.png"
+                              src={imageAvatar}
                               className="w-px-40 h-auto rounded-circle"
                             />
                           </div>

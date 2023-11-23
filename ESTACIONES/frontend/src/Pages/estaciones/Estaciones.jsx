@@ -2,13 +2,16 @@ import React from "react";
 import ItemEstacion from "./ItemEstacion";
 import useEstaciones from "../../hooks/useEstaciones";
 import { Link } from "react-router-dom";
+import Map from "../components/Map";
+
 const Estaciones = () => {
   const { estaciones } = useEstaciones();
   return (
     <>
       <div>
+        <Map />
         {/* <!-- Estaciones Start --> */}
-        <div className="container-fluid py-3">
+        <div className=" py-3">
           <div className="container pt-5 pb-3">
             <div className="text-center mb-3 pb-3">
               <h6
@@ -29,7 +32,7 @@ const Estaciones = () => {
                   <div className="p-3">
                     <Link
                       className="h6 text-decoration-none text-info"
-                      to={"/estaciones/add"}
+                      to={"/estaciones/crear"}
                     >
                       <i className="fa fa-plus text-info mr-2"></i>Añadir
                       estación

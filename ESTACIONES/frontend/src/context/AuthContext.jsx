@@ -5,14 +5,13 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
-  const [cargando, setCargando] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   useEffect(() => {
     const authUser = async () => {
       const token = localStorage.getItem("token");
       if (!token) {
-        setCargando(false);
+        setIsAuthenticated(false);
         return;
       }
 

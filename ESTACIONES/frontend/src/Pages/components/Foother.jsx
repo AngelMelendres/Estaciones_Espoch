@@ -1,4 +1,6 @@
 import React from "react";
+import imageLogo2 from "/img/logo-espoch2.png"
+import imageLogo3 from "/img/logo-geaa.png"
 
 const Foother = () => {
   return (
@@ -87,10 +89,10 @@ const Foother = () => {
               </p>
             </div>
           </div>
-          <div className="d-flex justify-content-center">
-            <img className="px-3" src="public/img/logo-espoch2.png"></img>
-            <img className="px-3" src="public/img/logo-geaa.png" ></img>
-          </div>
+         {/*  <div className="d-flex justify-content-center">
+            <img className="px-3" src={imageLogo2}></img>
+            <img className="px-3" src={imageLogo3}></img>
+          </div> */}
         </div>
         <div
           className="container-fluid bg-dark text-white border-top py-4 px-sm-3 px-md-5"
