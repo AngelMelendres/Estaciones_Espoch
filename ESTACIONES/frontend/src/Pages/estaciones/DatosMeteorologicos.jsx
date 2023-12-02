@@ -1,7 +1,7 @@
 import React from "react";
 import imgwind from "/img/imgwind.png";
 
-const DatosInstantaneos = () => {
+const DatosMeteorologicos = () => {
   // Simulación de datos provenientes de una base de datos
   const data = [
     {
@@ -81,53 +81,58 @@ const DatosInstantaneos = () => {
 
   return (
     <>
-      <div className="container mt-10">
-        <div className="my-10">
-          <h1>DATOS INSTANTÁNEOS PRINCIPALES</h1>
-          <p>
-            Los datos mostrados a continuación corresponden a mediciones tomadas
-            a la hora, a excepción de la precipitación la cual corresponde a una
-            suma horaria. La información se actualiza cada hora.
-          </p>
-        </div>
-        <table className="table table-striped">
-          <thead className="thead-dark">
-            <tr>
-              <th>Fecha Hora (GMT-5)</th>
-              <th>Estación</th>
-              <th>T(°C)</th>
-              <th>H(%)</th>
-              <th>Pr(mm)</th>
-              <th>Pa(Hpa)</th>
-              <th>Wd(°)</th>
-              <th>Ws(m/s)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((item, index) => (
-              <tr key={index}>
-                <td>{item.fechaHora}</td>
-                <td>{item.estacion}</td>
-                <td className={getColorClass(item.temperatura)}>
-                  {item.temperatura}
-                </td>
-                <td>{item.humedad}</td>
-                <td>{item.precipitacion}</td>
-                <td>{item.presion}</td>
-                <td>{item.direccionViento}</td>
-                <td>
-                  <div className="flex items-center gap-2">
-                    <img className="w-10" src={imgwind} alt="" />
-                    <p>{item.velocidadViento}</p>
-                  </div>
-                </td>
+      <div className="container mt-10 rounded-lg">
+      
+
+        <div className="shadow-xl px-5 py-2 bg-white">
+          <div className="my-10">
+            <h1>DATOS INSTANTÁNEOS PRINCIPALES</h1>
+            <p>
+              Los datos mostrados a continuación corresponden a mediciones
+              tomadas a la hora, a excepción de la precipitación la cual
+              corresponde a una suma horaria. La información se actualiza cada
+              hora.
+            </p>
+          </div>
+          <table className="table table-striped">
+            <thead className="thead-dark">
+              <tr>
+                <th>Fecha Hora (GMT-5)</th>
+                <th>Estación</th>
+                <th>T(°C)</th>
+                <th>H(%)</th>
+                <th>Pr(mm)</th>
+                <th>Pa(Hpa)</th>
+                <th>Wd(°)</th>
+                <th>Ws(m/s)</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {data.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.fechaHora}</td>
+                  <td>{item.estacion}</td>
+                  <td className={getColorClass(item.temperatura)}>
+                    {item.temperatura}
+                  </td>
+                  <td>{item.humedad}</td>
+                  <td>{item.precipitacion}</td>
+                  <td>{item.presion}</td>
+                  <td>{item.direccionViento}</td>
+                  <td>
+                    <div className="flex items-center gap-2">
+                      <img className="w-10" src={imgwind} alt="" />
+                      <p>{item.velocidadViento}</p>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   );
 };
 
-export default DatosInstantaneos;
+export default DatosMeteorologicos;

@@ -6,6 +6,9 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
   const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [informationUser, setInformationUser] = useState({
+    nombre: "",
+  });
 
   useEffect(() => {
     const authUser = async () => {
@@ -24,6 +27,9 @@ const AuthProvider = ({ children }) => {
       try {
         const data = await UsuarioAxios("/usuarios/perfil", config);
         setAuth(data);
+        setInformationUser({
+          nombre: auth.data.nombre,
+        });
       } catch (error) {}
     };
 
@@ -35,7 +41,9 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ setAuth, auth, isAuthenticated }}>
+    <AuthContext.Provider
+      value={{ setAuth, auth, isAuthenticated, informationUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

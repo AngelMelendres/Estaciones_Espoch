@@ -5,11 +5,12 @@ const Index = () => {
     <>
       <div>
         {/* <!-- Carusel Start --> */}
-        <div className="container-fluid p-0">
+        <div className="container-fluid p-0" >
           <div
             id="header-carousel"
-            className="carousel slide"
+            className="carousel slide mt-0"
             data-ride="carousel"
+            
           >
             <div className="carousel-inner">
               <div className="carousel-item active">
@@ -34,10 +35,7 @@ const Index = () => {
                 </div>
               </div>
               <div className="carousel-item">
-                <img
-                  className="w-100"
-                  src="/img/matus_n.jpeg"
-                ></img>
+                <img className="w-100" src="/img/matus_n.jpeg"></img>
                 <div className="carousel-caption d-flex flex-column align-items-center justify-content-center">
                   <div className="p-3" style={{ maxWidth: "900px" }}>
                     <h1 className="text-white text-uppercase mb-md-5">

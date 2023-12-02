@@ -2,9 +2,14 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import conectarDB from "./config/db.js";
-import estacionesRoutes from "./routes/estacionesRoutes.js"; // Reemplaza con el nombre correcto de tus rutas
-import usuarioRoutes from "./routes/usuarioRoutes.js"; // Reemplaza con el nombre correcto de tus rutas de usuario
-
+import estacionRoutes from "./routes/estacionRoutes.js";
+import sensorRoutes from "./routes/sensorRoutes.js";
+import mantenimientoRoutes from "./routes/mantenimientoRoutes.js";
+import rolRoutes from "./routes/rolRoutes.js";
+import blogRoutes from "./routes/blogRoutes.js";
+import imagenRoutes from "./routes/imagenRoutes.js";
+import tipoEstacionRoutes from "./routes/tipoEstacionRoutes.js";
+import usuarioRoutes from "./routes/usuarioRoutes.js";
 const app = express();
 app.use(express.json());
 
@@ -28,12 +33,15 @@ const whitelist = [process.env.FRONTEND_URL];
 }; */
 app.use(cors());
 
-
-
 // Routing
-app.use("/api/estaciones", estacionesRoutes); // 
-app.use("/api/usuarios", usuarioRoutes); // Rutas para el usuario
-
+app.use("/api/estaciones", estacionRoutes);
+app.use("/api/sensores", sensorRoutes);
+app.use("/api/mantenimientos", mantenimientoRoutes);
+app.use("/api/roles", rolRoutes);
+app.use("/api/blogs", blogRoutes);
+app.use("/api/imagenes", imagenRoutes);
+app.use("/api/tipoestaciones", tipoEstacionRoutes);
+app.use("/api/usuarios", usuarioRoutes);
 
 const PORT = process.env.PORT || 4000;
 const servidor = app.listen(PORT, () => {

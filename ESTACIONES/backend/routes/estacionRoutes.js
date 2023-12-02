@@ -5,7 +5,7 @@ import {
   crearEstacion,
   actualizarEstacion, // Descomenta esta línea
   eliminarEstacion,  // Descomenta esta línea
-} from "../controllers/estacionesController.js"; 
+} from "../controllers/estacionController.js"; 
 
 const router = express.Router();
 

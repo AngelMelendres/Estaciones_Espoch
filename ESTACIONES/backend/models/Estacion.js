@@ -8,7 +8,7 @@ class Estacion {
   }
 
   static async obtenerEstacionPorId(id) {
-    const query = "SELECT * FROM estaciones WHERE id = $1";
+    const query = "SELECT * FROM estaciones WHERE idestacion = $1";
     const values = [id];
     const { rows } = await pool.query(query, values);
     return rows[0];
@@ -17,25 +17,31 @@ class Estacion {
   static async crearEstacion(estacionData) {
     const {
       nombre,
+      ciudad,
       canton,
       parroquia,
-      provincia,
       longitud,
       latitud,
       altura,
-      imagen,
+      direccion,
+      promotorTerreno,
+      institucionACargo,
+      manualAutomatica,
     } = estacionData;
     const query =
-      "INSERT INTO estaciones (nombre, canton, parroquia, provincia, longitud, latitud, altura, imagen) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *";
+      "INSERT INTO estaciones (nombre, ciudad, canton, parroquia, longitud, latitud, altura, direccion, promotorTerreno, institucionACargo, manualAutomatica) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *";
     const values = [
       nombre,
+      ciudad,
       canton,
       parroquia,
-      provincia,
       longitud,
       latitud,
       altura,
-      imagen,
+      direccion,
+      promotorTerreno,
+      institucionACargo,
+      manualAutomatica,
     ];
     const { rows } = await pool.query(query, values);
     return rows[0];
@@ -44,25 +50,31 @@ class Estacion {
   static async actualizarEstacion(id, estacionData) {
     const {
       nombre,
+      ciudad,
       canton,
       parroquia,
-      provincia,
       longitud,
       latitud,
       altura,
-      imagen,
+      direccion,
+      promotorTerreno,
+      institucionACargo,
+      manualAutomatica,
     } = estacionData;
     const query =
-      "UPDATE estaciones SET nombre = $1, canton = $2, parroquia = $3, provincia = $4, longitud = $5, latitud = $6, altura = $7, imagen = $8 WHERE id = $9 RETURNING *";
+      "UPDATE estaciones SET nombre = $1, ciudad = $2, canton = $3, parroquia = $4, longitud = $5, latitud = $6, altura = $7, direccion = $8, promotorTerreno = $9, institucionACargo = $10, manualAutomatica = $11 WHERE idestacion = $12 RETURNING *";
     const values = [
       nombre,
+      ciudad,
       canton,
       parroquia,
-      provincia,
       longitud,
       latitud,
       altura,
-      imagen,
+      direccion,
+      promotorTerreno,
+      institucionACargo,
+      manualAutomatica,
       id,
     ];
     const { rows } = await pool.query(query, values);
@@ -70,7 +82,7 @@ class Estacion {
   }
 
   static async eliminarEstacion(id) {
-    const query = "DELETE FROM estaciones WHERE id = $1 RETURNING *";
+    const query = "DELETE FROM estaciones WHERE idestacion = $1 RETURNING *";
     const values = [id];
     const { rows } = await pool.query(query, values);
     return rows[0];

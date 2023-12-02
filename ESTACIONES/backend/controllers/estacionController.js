@@ -30,13 +30,16 @@ export const crearEstacion = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-}
+};
 
 export const actualizarEstacion = async (req, res) => {
   const { id } = req.params;
   const estacionData = req.body;
   try {
-    const estacionActualizada = await Estacion.actualizarEstacion(id, estacionData);
+    const estacionActualizada = await Estacion.actualizarEstacion(
+      id,
+      estacionData
+    );
     if (!estacionActualizada) {
       return res.status(404).json({ mensaje: "Estación no encontrada" });
     }

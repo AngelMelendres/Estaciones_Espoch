@@ -1,6 +1,7 @@
 import express from "express";
-const router = express.Router();
 import {
+  obtenerUsuarios,
+  obtenerUsuarioPorEmail,
   registrar,
   autenticar,
   confirmar,
@@ -10,14 +11,17 @@ import {
   perfil,
 } from "../controllers/usuarioController.js";
 
-import checkAuth from "../middleware/checkAuth.js";
+const router = express.Router();
 
-// Autenticación, Registro y Confirmación de Usuarios
-router.post("/registrar", registrar); // Crea un nuevo usuario
-router.post("/login", autenticar);
-router.get("/confirmar/:token", confirmar);
+// Rutas para los usuarios
+router.get("/", obtenerUsuarios);
+router.get("/:email", obtenerUsuarioPorEmail);
+router.post("/registrar", registrar);
+router.post("/autenticar", autenticar);
+router.put("/confirmar/:token", confirmar);
 router.post("/olvide-password", olvidePassword);
-router.route("/olvide-password/:token").get(comprobarToken).post(nuevoPassword);
-router.get("/perfil", checkAuth, perfil);
+router.get("/comprobar-token/:token", comprobarToken);
+router.put("/nuevo-password/:token", nuevoPassword);
+router.get("/perfil", perfil);
 
 export default router;
